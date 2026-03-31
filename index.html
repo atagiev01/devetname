@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ROOT */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* BODY */
+body {
+  position: relative;
+  background: #f3ead7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+/* BACKGROUND PROJECT (particles üçün) */
+[data-us-project] {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+}
+
+/* CANVAS */
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* CENTER WRAPPER */
+.center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  max-width: 300px;
+  padding: 50px 25px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* CARD LINES */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background: #ffc400;
+  left: 10%;
+}
+
+.card::before {
+  top: 20px;
+}
+
+.card::after {
+  bottom: 20px;
+}
+
+/* TITLE */
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+/* TITLE LINES */
+.title::before,
+.title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: #ffc400;
+}
+
+.title::before {
+  left: -70px;
+}
+
+.title::after {
+  right: -70px;
+}
+
+/* TEXT */
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.names {
+  font-size: 26px;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.date {
+  font-size: 16px;
+  color: #444;
+  margin-top: 10px;
+}
+
+/* SPLASH SCREEN */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+#splash img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RESPONSIVE IMAGE */
+@media (max-width: 1200px) {
+  #splash img {
+    object-fit: contain;
+  }
+}
+
+/* SPLASH HIDE */
+#splash.hide {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+/* MAIN CONTENT */
+#main-content {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#main-content.show {
+  opacity: 1;
+}
+
+/* MOBILE */
+@media(max-width: 500px) {
+  .title::before,
+  .title::after {
+    display: none;
+  }
+}
+</style>
+<body>
+<div id="splash">
+  <img src="/ChatGPT Image 28 мар. 2026 г., 00_46_06.png" alt="cover">
+</div>
+        
+   <canvas id="particles"></canvas>
+
+
+   <script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+const numberOfParticles = 120;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+
+    this.size = Math.random() * 3 + 1;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+
+    this.opacity = Math.random() * 0.5 + 0.3;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // sərhəddən çıxanda geri gətir
+    if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
+    if (this.y < 0 || this.y > canvas.height) this.y = Math.random() * canvas.height;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fillStyle = `rgba(210, 180, 140, ${this.opacity})`; // daha görünən   
+ ctx.fill();
+  }
+}
+
+// create particles
+function init() {
+  particles = [];
+  for (let i = 0; i < numberOfParticles; i++) {
+    particles.push(new Particle());
+  }
+}
+
+// animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+init();
+animate();
+</script>
+
+<div class="hero">
+    <div class="center">
+            <div class="card">
+    <div class="title">Dəvət</div>
+
+    <div class="subtitle">
+      Sizi xüsusi günümüzə dəvət edirik
+    </div>
+
+    <div class="names">
+      Rəhim & Sevinc
+    </div>
+
+    <div class="date">
+      19 aprel 2026 • Saat 14:00
+    </div>
+            </div>
+    </div>
+</div>
+
+
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(() => {
+      const splash = document.getElementById("splash");
+      const content = document.getElementById("main-content");
+
+      splash.classList.add("hide");
+      content.classList.add("show");
+
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 1000);
+
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
