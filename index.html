@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rəhim & Sevinc</title>
 </head>
 
 <style>
@@ -24,7 +24,6 @@ html, body {
 /* BODY */
 body {
   position: relative;
-  background: #f3ead7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
@@ -54,14 +53,24 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 /* CARD */
 .card {
   position: relative;
-  max-width: 300px;
-  padding: 50px 25px;
   background: #fff;
-  border-radius: 20px;
+  max-width: 500px;
+
+  border-radius: 5px;
   text-align: center;
   box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -72,7 +81,6 @@ body {
 .card::after {
   content: "";
   position: absolute;
-  width: 80%;
   height: 2px;
   background: #ffc400;
   left: 10%;
@@ -187,7 +195,7 @@ body {
 </style>
 <body>
 <div id="splash">
-  <img src="/ChatGPT Image 28 мар. 2026 г., 00_46_06.png" alt="cover">
+  <img src="/invitation.png" class="fold-img" alt="cover">
 </div>
         
    <canvas id="particles"></canvas>
@@ -263,21 +271,11 @@ animate();
 
 <div class="hero">
     <div class="center">
-            <div class="card">
-    <div class="title">Dəvət</div>
-
-    <div class="subtitle">
-      Sizi xüsusi günümüzə dəvət edirik
-    </div>
-
-    <div class="names">
-      Rəhim & Sevinc
-    </div>
-
-    <div class="date">
-      19 aprel 2026 • Saat 14:00
-    </div>
+          <a href="https://maps.app.goo.gl/wT5bdWUWZQrNs8hDA">
+              <div class="card">
+                <img src="/image.png" alt="">
             </div>
+          </a>
     </div>
 </div>
 
@@ -293,7 +291,7 @@ animate();
 
       setTimeout(() => {
         splash.style.display = "none";
-      }, 1000);
+      }, 1500);
 
     }, 500);
   });
